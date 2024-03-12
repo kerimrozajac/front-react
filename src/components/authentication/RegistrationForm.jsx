@@ -6,12 +6,12 @@ import { useUserActions } from "../../hooks/user.actions";
 function RegistrationForm() {
   const [validated, setValidated] = useState(false);
   const [form, setForm] = useState({
-    username: "",
-    email: "",
-    password: "",
     first_name: "",
     last_name: "",
-    bio: "",
+    username: "",
+    email: "",
+    password1: "",
+    password2: "",
   });
   const [error, setError] = useState(null);
   const userActions = useUserActions();
@@ -28,11 +28,11 @@ function RegistrationForm() {
 
     const data = {
       username: form.username,
-      password: form.password,
+      password1: form.password1,
+      password2: form.password2,
       email: form.email,
       first_name: form.first_name,
       last_name: form.last_name,
-      bio: form.bio,
     };
 
     userActions.register(data).catch((err) => {
@@ -51,53 +51,25 @@ function RegistrationForm() {
       onSubmit={handleSubmit}
       data-testid="register-form"
     >
-      <Form.Group className="mb-3">
-        <Form.Label>First Name</Form.Label>
-        <Form.Control
-          value={form.first_name}
-          data-testid="first-name-field"
-          onChange={(e) => setForm({ ...form, first_name: e.target.value })}
-          required
-          type="text"
-          placeholder="Enter first name"
-        />
-        <Form.Control.Feedback type="invalid">
-          This file is required.
-        </Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label>Last name</Form.Label>
-        <Form.Control
-          value={form.last_name}
-          data-testid="last-name-field"
-          onChange={(e) => setForm({ ...form, last_name: e.target.value })}
-          required
-          type="text"
-          placeholder="Enter last name"
-        />
-        <Form.Control.Feedback type="invalid">
-          This file is required.
-        </Form.Control.Feedback>
-      </Form.Group>
+      
       <Form.Group className="mb-3">
         <Form.Label>Username</Form.Label>
         <Form.Control
           value={form.username}
-          data-testid="username-field"
           onChange={(e) => setForm({ ...form, username: e.target.value })}
           required
           type="text"
           placeholder="Enter username"
         />
         <Form.Control.Feedback type="invalid">
-          This file is required.
+          This field is required.
         </Form.Control.Feedback>
       </Form.Group>
+
       <Form.Group className="mb-3">
         <Form.Label>Email address</Form.Label>
         <Form.Control
           value={form.email}
-          data-testid="email-field"
           onChange={(e) => setForm({ ...form, email: e.target.value })}
           required
           type="email"
@@ -107,14 +79,13 @@ function RegistrationForm() {
           Please provide a valid email.
         </Form.Control.Feedback>
       </Form.Group>
-
+      
       <Form.Group className="mb-3">
         <Form.Label>Password</Form.Label>
         <Form.Control
-          value={form.password}
-          data-testid="password-field"
+          value={form.password1}
           minLength="8"
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
+          onChange={(e) => setForm({ ...form, password1: e.target.value })}
           required
           type="password"
           placeholder="Password"
@@ -125,15 +96,18 @@ function RegistrationForm() {
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label>Bio</Form.Label>
+        <Form.Label>Retype Password</Form.Label>
         <Form.Control
-          value={form.bio}
-          data-testid="bio-field"
-          onChange={(e) => setForm({ ...form, bio: e.target.value })}
-          as="textarea"
-          rows={3}
-          placeholder="A simple bio ... (Optional)"
+          value={form.password2}
+          minLength="8"
+          onChange={(e) => setForm({ ...form, password2: e.target.value })}
+          required
+          type="password"
+          placeholder="Retype Password"
         />
+        <Form.Control.Feedback type="invalid">
+          Passwords do not match.
+        </Form.Control.Feedback>
       </Form.Group>
 
       <div className="text-content text-danger">{error && <p>{error}</p>}</div>

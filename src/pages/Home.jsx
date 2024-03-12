@@ -9,10 +9,10 @@ import CreatePost from "../components/posts/CreatePost";
 import ProfileCard from "../components/profile/ProfileCard";
 
 function Home() {
-  const posts = useSWR("/post/", fetcher, {
+  const posts = useSWR("/", fetcher, {
     refreshInterval: 20000,
   });
-  const profiles = useSWR("/user/?limit=5", fetcher);
+  const profiles = useSWR("/users/?limit=5", fetcher);
 
   const user = getUser();
 

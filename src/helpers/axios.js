@@ -17,7 +17,7 @@ axiosService.interceptors.request.use(async (config) => {
   /**
    * Retrieving the access and refresh tokens from the local storage
    */
-  config.headers.Authorization = `Bearer ${getAccessToken()}`;
+  config.headers.Authorization = `Token ${getAccessToken()}`;
   return config;
 });
 
