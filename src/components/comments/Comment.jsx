@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { format } from "timeago.js";
+//import { format } from "timeago.js";
 import { LikeOutlined, LikeFilled } from "@ant-design/icons";
 import { Image, Card, Dropdown } from "react-bootstrap";
 import axiosService from "../../helpers/axios";
@@ -16,7 +16,7 @@ function Comment(props) {
 
   const handleLikeClick = (action) => {
     axiosService
-      .post(`/post/${postId}/comment/${comment.id}/${action}/`)
+      .post(`/${postId}/comment/${comment.id}/${action}/`)
       .then(() => {
         refresh();
       })
@@ -25,7 +25,7 @@ function Comment(props) {
 
   const handleDelete = () => {
     axiosService
-      .delete(`/post/${postId}/comment/${comment.id}/`)
+      .delete(`/${postId}/comment/${comment.id}/`)
       .then(() => {
         setToaster({
           type: "danger",
@@ -60,7 +60,7 @@ function Comment(props) {
             <div className="d-flex flex-column justify-content-start align-self-center mt-2">
               <p className="fs-6 m-0">{comment.author.name}</p>
               <p className="fs-6 fw-lighter">
-                <small>{format(comment.created)}</small>
+                <small>{comment.created}</small>
               </p>
             </div>
           </div>
