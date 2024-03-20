@@ -27,10 +27,10 @@ axiosService.interceptors.response.use(
   (err) => Promise.reject(err)
 );
 
-
+/*
 const refreshAuthLogic = async (failedRequest) => {
   return axios
-    /*.post(
+    .post(
       "/auth/refresh/",
       {
         refresh: getRefreshToken(),
@@ -38,14 +38,14 @@ const refreshAuthLogic = async (failedRequest) => {
       {
         baseURL: process.env.REACT_APP_API_URL,
       }
-    )*/
+    )
     .then((resp) => {
       const { access } = resp.data;
       failedRequest.response.config.headers["Authorization"] =
         "Token " + access;
       localStorage.setItem(
         "auth",
-        JSON.stringify({ access, /*refresh: getRefreshToken(),*/ user: getUser() })
+        JSON.stringify({ access, refresh: getRefreshToken(), user: getUser() })
       );
     })
     .catch(() => {
@@ -54,7 +54,7 @@ const refreshAuthLogic = async (failedRequest) => {
 };
 
 createAuthRefreshInterceptor(axiosService, refreshAuthLogic);
-
+*/
 
 export function fetcher(url) {
   return axiosService.get(url).then((res) => res.data);
