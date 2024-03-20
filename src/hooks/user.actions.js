@@ -11,26 +11,30 @@ function useUserActions() {
     register,
     logout,
     edit,
+    fetchUser,
   };
 
   // Login the user
   function login(data) {
     return axios.post(`${baseURL}/auth/login/`, data).then((res) => {
-      // Registering the account and tokens in the store
-      // trenutno jedina data koja se returna je "key"
-      // pa se i samo to i setuje kao user data
-      // znaci  user, refresh i acccess token ostaje prazno
-      // i onda  vamo kad radi getUser, naravno da nista i ne geta jer nema sta da geta
 
-      // mozda ovdje ubaciti neko fetchanje usera
-      // pa bi se onda to moglo setati u user datu i tako bi se mogla i koristit getUser funkcija
+      // postavlja key iz responsa
+      setKey(res.data.key);
+      
+      // salje request da dobije informaciju o useru
+      fetchUser();
 
-
-      setUserData(res.data);
-
-
-
+      // navigira na home screen
       navigate("/");
+    });
+  }
+
+  // Fetch the user
+  function fetchUser() {
+    return axiosService
+    .get(`${baseURL}/auth/user/`)
+    .then((userRes) => {
+      setUser(userRes.data);
     });
   }
 
@@ -38,7 +42,7 @@ function useUserActions() {
   function register(data) {
     return axios.post(`${baseURL}/auth/register/`, data).then((res) => {
       // Registering the account and tokens in the store
-      setUserData(res.data);
+      setUser(res.data);
       navigate("/"); 
     });
   }
@@ -99,6 +103,8 @@ function getToken() {
   return auth.key;
 }
 
+
+
 /*
 // Get the CSRF token
 function getCSRFToken() {
@@ -107,19 +113,26 @@ function getCSRFToken() {
 }
 */
 
-// Set the access, token and user property
-// znaci ovo jedino sto sad setuje je key
-function setUserData(data) {
+// Set the user property
+function setUser(user) {
   localStorage.setItem(
     "auth",
     JSON.stringify({
-      key: data.key,
-      access: data.access,
-      //csrf: data.csrf,
-      user: data.user,
+      user: user,
     })
   );
 }
+
+function setKey(key) {
+  localStorage.setItem(
+    "auth",
+    JSON.stringify({
+      key: key,
+    })
+  );
+}
+
+
 
 export {
   useUserActions,
@@ -127,5 +140,6 @@ export {
   getToken,
   getAccessToken,
   //getCSRFToken,
-  setUserData,
+  setUser as setUserData,
+  setKey,
 };
