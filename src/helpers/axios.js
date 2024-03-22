@@ -16,7 +16,7 @@ const axiosService = axios.create({
 
 axiosService.interceptors.request.use(async (config) => {
   /**
-   * Retrieving the access and refresh tokens from the local storage
+   * Retrieving the access token from the local storage
    */
   config.headers.Authorization = `Token ${getToken()}`;
   return config;

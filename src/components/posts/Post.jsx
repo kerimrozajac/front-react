@@ -26,7 +26,7 @@ function Post(props) {
 
   const handleDelete = () => {
     axiosService
-      .delete(`/post/${post.id}/`)
+      .delete(`/${post.id}/`)
       .then(() => {
         setToaster({
           type: "warning",
@@ -53,7 +53,8 @@ function Post(props) {
           <Card.Title className="d-flex flex-row justify-content-between">
             <div className="d-flex flex-row">
               <Image
-                src={post.author.avatar}
+                //src={post.author.avatar}
+                src={randomAvatar()}
                 roundedCircle
                 width={48}
                 height={48}
@@ -105,7 +106,7 @@ function Post(props) {
             {!isSinglePost && (
               <p className="ms-1 fs-6">
                 <small>
-                  <Link to={`/post/${post.id}/`}>
+                  <Link to={`/${post.id}/`}>
                     {post.comments_count} comments
                   </Link>
                 </small>
