@@ -29,7 +29,8 @@ function useUserActions() {
     });
   }
 
-  // Fetch the user
+  // Fetch user
+  // vraca informaciju o useru i salje je na pohranu u lkalni storage
   function fetchUser() {
     return axiosService
     .get(`${baseURL}/auth/user/`)
@@ -83,8 +84,9 @@ function useUserActions() {
 // Get the user
 function getUser() {
   const user = JSON.parse(localStorage.getItem("user")) || null;
+  console.log("User from localStorage:", user);
   if (user) {
-    return user.user;
+    return user;
   } else {
     return null;
   }
@@ -104,15 +106,6 @@ function getToken() {
   return auth.key;
 }
 
-
-
-/*
-// Get the CSRF token
-function getCSRFToken() {
-  const auth = JSON.parse(localStorage.getItem("auth"));
-  return auth.csrf;
-}
-*/
 
 // Set the user property
 function setUser(user) {

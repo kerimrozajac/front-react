@@ -10,6 +10,7 @@ import { randomAvatar } from "../utils";
 //import ProfileCard from "../components/profile/ProfileCard";
 
 function Home() {
+
   const posts = useSWR("/", fetcher, {
     refreshInterval: 20000,
   });
@@ -20,6 +21,8 @@ function Home() {
   if (!user) {
     return <div>Loading!</div>;
   }
+
+
 
   return (
     <Layout>
