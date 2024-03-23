@@ -8,7 +8,7 @@ import { getUser } from "../../hooks/user.actions";
 import UpdatePost from "./UpdatePost";
 import { Context } from "../Layout";
 import MoreToggleIcon from "../MoreToggleIcon";
-import { randomAvatar } from "../utils";
+import { randomAvatar } from "../../utils";
 
 function Post(props) {
   const { post, refresh, isSinglePost } = props;
