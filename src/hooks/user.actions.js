@@ -82,9 +82,9 @@ function useUserActions() {
 
 // Get the user
 function getUser() {
-  const auth = JSON.parse(localStorage.getItem("auth")) || null;
-  if (auth) {
-    return auth.user;
+  const user = JSON.parse(localStorage.getItem("user")) || null;
+  if (user) {
+    return user.user;
   } else {
     return null;
   }
@@ -100,6 +100,7 @@ function getAccessToken() {
 // Get the auth key token
 function getToken() {
   const auth = JSON.parse(localStorage.getItem("auth"));
+  console.log("Auth from localStorage:", auth);
   return auth.key;
 }
 
@@ -116,7 +117,7 @@ function getCSRFToken() {
 // Set the user property
 function setUser(user) {
   localStorage.setItem(
-    "auth",
+    "user",
     JSON.stringify({
       user: user,
     })

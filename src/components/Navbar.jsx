@@ -5,6 +5,8 @@ import { Navbar, Container, Image, NavDropdown, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getUser, useUserActions } from "../hooks/user.actions";
 
+import { randomAvatar } from "../utils";
+
 function NavigationBar() {
   const { setToaster } = useContext(Context);
 
@@ -27,13 +29,14 @@ function NavigationBar() {
     <Navbar bg="primary" variant="dark">
       <Container>
         <Navbar.Brand className="fw-bold" as={Link} to={`/`}>
-          Postagram
+          Kerim-test
         </Navbar.Brand>
         <Navbar.Collapse className="justify-content-end">
           <Nav>
             <NavDropdown
               title={
-                <Image src={user.avatar} roundedCircle width={36} height={36} />
+                //<Image src={user.avatar} roundedCircle width={36} height={36} />
+                <Image src={randomAvatar()} roundedCircle width={36} height={36} />
               }
             >
               <NavDropdown.Item as={Link} to={`/profile/${user.id}/`}>
