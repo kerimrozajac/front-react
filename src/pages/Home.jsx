@@ -6,6 +6,7 @@ import { fetcher } from "../helpers/axios";
 import { getUser } from "../hooks/user.actions";
 import { Post } from "../components/posts";
 import CreatePost from "../components/posts/CreatePost";
+import { randomAvatar } from "../utils";
 //import ProfileCard from "../components/profile/ProfileCard";
 
 function Home() {
