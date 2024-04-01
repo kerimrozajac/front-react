@@ -4,7 +4,6 @@ import axios from "axios";
 
 function useUserActions() {
   const navigate = useNavigate();
-  //const history = useHistory();
   const baseURL = process.env.REACT_APP_API_URL;
 
   return {
@@ -16,38 +15,10 @@ function useUserActions() {
   };
 
 
-  /*
-  // Login the user
-  function login(data) {
-    return axios.post(`${baseURL}/auth/login/`, data).then((res) => {
-
-      // postavlja key iz responsa
-      setKey(res.data.key);
-      
-      // salje request da dobije informaciju o useru
-      //fetchUser();
-
-      // NOTE!!
-      // ovo ovdje ne valja
-      // jednostavno traje predugo
-
-      // treba rastaviti na step by step
-
-      // navigacija treba da se desi 
-
-      fetchUser().then(navigate("/"));
-
-      // navigira na home screen
-      //navigate("/");
-      //history.push("/");
-    });
-  }
-  */
-  // NAPOMENA!!!
-  // PROBATI ASYNC LOGIN I FETCH
+  
+  // login user
   // wait for the user data before setting it and then wait for it to be set before continuing to navigate
 
-  
   async function login(data) {
     try {
       const res = await axios.post(`${baseURL}/auth/login/`, data);
@@ -61,26 +32,15 @@ function useUserActions() {
   }
   
 
-  /*
+
   // Fetch user
   // vraca informaciju o useru i salje je na pohranu u lkalni storage
-  function fetchUser() {
-    return axiosService
-    .get(`${baseURL}/auth/user/`)
-    .then((userRes) => {
-      setUser(userRes.data);
-    });
-  }
-  */
 
-  // probati async fetch user funkciju
-
-  
   async function fetchUser() {
     try {
       const userRes = await axiosService.get(`${baseURL}/auth/user/`);
-      setUser(userRes.data); // Assuming setUser is a function that sets user data
-      return userRes.data; // Return the user data
+      setUser(userRes.data); // forwarding the user data to be set
+      return userRes.data; // retturning the user data
     } catch (error) {
       console.error("Error fetching user:", error);
       throw error; // Rethrow the error to handle it elsewhere if needed
@@ -98,7 +58,8 @@ function useUserActions() {
     });
   }
 
-  // Edit the user
+  // POTREBNO REFAKTORISAT
+  // Edit the user 
   function edit(data, userId) {
     return axiosService
       .patch(`${baseURL}/users/${userId}/`, data, {
@@ -112,8 +73,6 @@ function useUserActions() {
           "auth",
           JSON.stringify({
             key: getToken(),
-            access: getAccessToken(),
-            //csrf: getCSRFToken(),
             user: res.data,
           })
         );
@@ -126,6 +85,7 @@ function useUserActions() {
       .post(`${baseURL}/auth/logout/`)
       .then(() => {
         localStorage.removeItem("auth");
+        localStorage.removeItem("user");
         navigate("/login");
       });
   }
@@ -142,18 +102,20 @@ function getUser() {
   }
 }
 
+/*
 // znaci ovo nema sta da geta kad nista i ne seta pod auth.access
 // Get the access token
-function getAccessToken() {
+function getToken() {
   const auth = JSON.parse(localStorage.getItem("auth"));
-  return auth.access;
+  return auth.key;
 }
+*/
 
 // Get the auth key token
 function getToken() {
-  const auth = JSON.parse(localStorage.getItem("auth"));
-  console.log("Auth from localStorage:", auth);
-  return auth.key;
+  const key = JSON.parse(localStorage.getItem("key"));
+  console.log("Auth from localStorage:", key);
+  return key;
 }
 
 
@@ -161,14 +123,13 @@ function getToken() {
 function setUser(user) {
   localStorage.setItem(
     "user",
-    JSON.stringify(//{
-      //user: user,
+    JSON.stringify(
       user
-    //}
     )
   );
 }
 
+/*
 function setKey(key) {
   localStorage.setItem(
     "auth",
@@ -177,14 +138,24 @@ function setKey(key) {
     })
   );
 }
+*/
 
+// test
+function setKey(key) {
+  localStorage.setItem(
+    "key",
+    JSON.stringify(
+      key
+    )
+  );
+}
 
 
 export {
   useUserActions,
   getUser,
   getToken,
-  getAccessToken,
+  //getAccessToken,
   //getCSRFToken,
   setUser as setUserData,
   setKey,

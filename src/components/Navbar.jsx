@@ -26,7 +26,7 @@ function NavigationBar() {
   };
 
   return (
-    <Navbar bg="primary" variant="dark">
+    <Navbar bg="dark" variant="dark">
       <Container>
         <Navbar.Brand className="fw-bold" as={Link} to={`/`}>
           Kerim-testttt
