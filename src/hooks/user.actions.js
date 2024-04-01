@@ -41,6 +41,25 @@ function useUserActions() {
     });
   }
 
+  // NAPOMENA!!!
+  // PROBATI ASYNC LOGIN I FETCH
+  // wait for the user data before setting it and then wait for it to be set before continuing to navigate
+
+  /*
+  async function login(data) {
+    try {
+      const res = await axios.post(`${baseURL}/auth/login/`, data);
+      setKey(res.data.key);
+      const userData = await fetchUser(); // Wait for user data to be fetched
+      navigate("/"); // Navigate to home page after successful login
+    } catch (error) {
+      console.error("Login error:", error);
+      throw error; // Rethrow the error to handle it elsewhere if needed
+    }
+  }
+  */
+
+
   // Fetch user
   // vraca informaciju o useru i salje je na pohranu u lkalni storage
   function fetchUser() {
@@ -50,6 +69,23 @@ function useUserActions() {
       setUser(userRes.data);
     });
   }
+
+
+  // probati async fetch user funkciju
+
+  /*
+  async function fetchUser() {
+    try {
+      const userRes = await axiosService.get(`${baseURL}/auth/user/`);
+      setUser(userRes.data); // Assuming setUser is a function that sets user data
+      return userRes.data; // Return the user data
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      throw error; // Rethrow the error to handle it elsewhere if needed
+    }
+  }
+  */
+
 
   // Register the user
   function register(data) {
