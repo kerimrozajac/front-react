@@ -4,6 +4,7 @@ import axios from "axios";
 
 function useUserActions() {
   const navigate = useNavigate();
+  //const history = useHistory();
   const baseURL = process.env.REACT_APP_API_URL;
 
   return {
@@ -22,10 +23,21 @@ function useUserActions() {
       setKey(res.data.key);
       
       // salje request da dobije informaciju o useru
-      fetchUser();
+      //fetchUser();
+
+      // NOTE!!
+      // ovo ovdje ne valja
+      // jednostavno traje predugo
+
+      // treba rastaviti na step by step
+
+      // navigacija treba da se desi 
+
+      fetchUser().then(navigate("/"));
 
       // navigira na home screen
-      navigate("/");
+      //navigate("/");
+      //history.push("/");
     });
   }
 
@@ -111,9 +123,11 @@ function getToken() {
 function setUser(user) {
   localStorage.setItem(
     "user",
-    JSON.stringify({
-      user: user,
-    })
+    JSON.stringify(//{
+      //user: user,
+      user
+    //}
+    )
   );
 }
 
