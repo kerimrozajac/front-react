@@ -55,7 +55,7 @@ function ConfirmRegistrationForm() {
       validated={validated}
       onSubmit={handleSubmit}
       data-testid="confirm-register-form"
-      style={{ width: "400px" }} // Adjusting the container width
+      style={{ width: "350px" }} // Adjusting the container width
     >
       
       <Form.Group className="mb-3">
@@ -73,7 +73,7 @@ function ConfirmRegistrationForm() {
               required
               type="text"
               maxLength={1}
-              placeholder="-"
+              placeholder=" "
               style={{ width: "45px", marginRight: "5px", textAlign: "center" }}
             />
           ))}
