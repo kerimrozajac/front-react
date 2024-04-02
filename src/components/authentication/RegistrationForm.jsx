@@ -35,12 +35,18 @@ function RegistrationForm() {
       last_name: form.last_name,
     };
 
+    
     userActions.register(data).catch((err) => {
       if (err.message) {
         setError(err.request.response);
       }
     });
+    
+
   };
+
+
+
 
   return (
     <Form

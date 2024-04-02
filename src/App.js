@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Home from "./pages/Home";
 import Registration from "./pages/Registration";
+import ConfirmRegistration from "./pages/ConfirmRegistration";
 import Login from "./pages/Login";
 import SinglePost from "./pages/SinglePost";
 import Profile from "./pages/Profile";
@@ -45,6 +46,7 @@ function App() {
       />
       <Route path="/login/" element={<Login />} />
       <Route path="/register/" element={<Registration />} />
+      <Route path="/register/confirm/" element={<ConfirmRegistration />} />
       <Route path="*" element={<div>Page not found</div>} />
     </Routes>
   );

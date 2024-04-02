@@ -12,6 +12,7 @@ function useUserActions() {
     logout,
     edit,
     fetchUser,
+    sendConfirmationCode,
   };
 
 
@@ -53,9 +54,21 @@ function useUserActions() {
   function register(data) {
     return axios.post(`${baseURL}/auth/register/`, data).then((res) => {
       // Registering the account and tokens in the store
-      setUser(res.data);
-      navigate("/"); 
+      // setUser(res.data);
+      // navigate("/"); 
+      navigate("/register/confirm/");
     });
+  }
+
+
+  // Slanje konfirmacijskog koda
+  // trenutno je samo placeholder koji forwarduje
+  function sendConfirmationCode() {
+
+    // dodati funkciju koja trigeruje slanje konfirmacijskog koda
+    // mozda proslijediti user datu backendu odma kao sto je odradjeno u register funkciji
+
+    navigate("/register/confirm/");
   }
 
   // POTREBNO REFAKTORISAT
