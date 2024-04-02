@@ -55,7 +55,7 @@ function ConfirmRegistrationForm() {
       validated={validated}
       onSubmit={handleSubmit}
       data-testid="confirm-register-form"
-      style={{ maxWidth: "400px" }} // Adjusting the container width
+      style={{ width: "400px" }} // Adjusting the container width
     >
       
       <Form.Group className="mb-3">
@@ -63,21 +63,21 @@ function ConfirmRegistrationForm() {
         
        
 
-          <div className="d-flex" style={{ width: "100%", justifyContent: "space-between"}}>
-            {confirmationCode.map((code, index) => (
-              <Form.Control
-                key={index}
-                ref={(input) => (codeInputs.current[index] = input)}
-                value={code}
-                onChange={(e) => handleChange(index, e.target.value)}
-                required
-                type="text"
-                maxLength={1}
-                placeholder="-"
-                style={{ width: "45px", marginRight: "5px", textAlign: "center" }}
-              />
-            ))}
-          </div>
+        <div className="d-flex">
+          {confirmationCode.map((code, index) => (
+            <Form.Control
+              key={index}
+              ref={(input) => (codeInputs.current[index] = input)}
+              value={code}
+              onChange={(e) => handleChange(index, e.target.value)}
+              required
+              type="text"
+              maxLength={1}
+              placeholder="-"
+              style={{ width: "45px", marginRight: "5px", textAlign: "center" }}
+            />
+          ))}
+        </div>
 
         <Form.Control.Feedback type="invalid">
           This field is required.
