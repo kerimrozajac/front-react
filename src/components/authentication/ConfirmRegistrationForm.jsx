@@ -29,6 +29,7 @@ function ConfirmRegistrationForm() {
 
     const data = {
       confirmation_code: confirmationCode.join(""),
+      email: "placeholder@email.com",
     };
 
     userActions.sendConfirmationCode(data).catch((err) => {
